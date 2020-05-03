@@ -1,3 +1,4 @@
+--Configuration file of Awesomewm by Ajay N R
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
@@ -52,7 +53,7 @@ beautiful.init("/home/ajayraj/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "terminator"
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -218,6 +219,8 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             --mykeyboardlayout,
+            --Battery-widget from https://github.com/deficient/battery-widget
+            --Clone the repository in ~/.config/awesome
             require("battery-widget"){adapter = "BAT0",ac="AC"},
             wibox.widget.systray(),
             mytextclock,
@@ -249,15 +252,15 @@ globalkeys = gears.table.join(
 
     awful.key({ modkey,           }, "k",
         function ()
-            awful.client.focus.byidx( 1)
-        end,
-        {description = "focus next by index", group = "client"}
-    ),
-    awful.key({ modkey,           }, "j",
-        function ()
             awful.client.focus.byidx(-1)
         end,
         {description = "focus previous by index", group = "client"}
+    ),
+    awful.key({ modkey,           }, "j",
+        function ()
+            awful.client.focus.byidx(1)
+        end,
+        {description = "focus next by index", group = "client"}
     ),
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
