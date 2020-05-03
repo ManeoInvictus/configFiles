@@ -1,13 +1,13 @@
 # configFiles
 A repository of my collection of config files and widgets for AwesomeWM and VIM editor.
 
-# vim
+## vim
 The vim folder contains the .vimrc file; to be placed in the home directory.
 My vim is configured to function like a Python IDE; plugins managed by Pathogen. All the necessary links
 for the plugin are in the .vimrc file. The base file is the sample file by Martin Brochhaus presented at PyCon APAC
 2012. I have further modified it for my needs.
 
-# awesome
+## awesome
 The awesome folder contains the config files for awesome window manager. Clone this folder in ~/.config/
 rc.lua is the main configuration file which handles the layout, themes, widgets etc. It is a modified file of the 
 default config file located in /etc/xdg/awesome
