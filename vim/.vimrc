@@ -4,54 +4,7 @@ hi Normal ctermbg=16 guibg=#000000
 hi LineNr ctermbg=16 guibg=#000000
 " Sample .vimrc file by Martin Brochhaus
 " Presented at PyCon APAC 2012
-
-
-" ============================================
-" Note to myself:
-" DO NOT USE <C-z> FOR SAVING WHEN PRESENTING!
-" ============================================
-
-
-" Automatic reloading of .vimrc
-autocmd! bufwritepost .vimrc source %
-
-" Better copy & paste
-" When you want to paste large blocks of code into vim, press F2 before you
-" paste. At the bottom you should see ``-- INSERT (paste) --``.
-
-"" set pastetoggle=<F2>
-set clipboard=unnamed
-
-
-" Mouse and backspace
-"" set mouse=a  " on OSX press ALT and click
-"" set bs=2     " make backspace behave like normal again
-
-
-" Rebind <Leader> key
-" I like to have it here becuase it is easier to reach than the default and
-" it is next to ``m`` and ``n`` which I use for navigating between tabs.
-let mapleader = ","
-
-
-" Bind nohl
-" Removes highlight of your last search
-" ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
-"" noremap <C-n> :nohl<CR>
-"" vnoremap <C-n> :nohl<CR>
-"" inoremap <C-n> :nohl<CR>
-
-
-" Quicksave command
-"" noremap <C-Z> :update<CR>
-"" vnoremap <C-Z> <C-C>:update<CR>
-"" inoremap <C-Z> <C-O>:update<CR>
-
-
-" Quick quit command
-"" noremap <Leader>e :quit<CR>  " Quit current window
-"" noremap <Leader>E :qa!<CR>   " Quit all windows
-
+" Tweaked by Ajay N R
 
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
 " Every unnecessary keystroke that can be saved is good for your health :)
@@ -102,8 +55,8 @@ set number  " show line numbers
 set tw=79   " width of document (used by gd)
 set nowrap  " don't automatically wrap on load
 "" set fo-=t   " don't automatically wrap text when typing
-"" set colorcolumn=80
-"" highlight ColorColumn ctermbg=233
+set colorcolumn=80
+highlight ColorColumn ctermbg=233
 
 
 " easier formatting of paragraphs
@@ -112,8 +65,8 @@ set nowrap  " don't automatically wrap on load
 
 
 " Useful settings
-"" set history=700
-"" set undolevels=700
+set history=700
+set undolevels=700
 
 
 " Real programmers don't use TABs but spaces
@@ -135,7 +88,7 @@ set smartcase
 " for file system watchers
 "" set nobackup
 "" set nowritebackup
-"" set noswapfile
+set noswapfile
 
 
 " Setup Pathogen to manage your plugins
@@ -144,6 +97,29 @@ set smartcase
 " Now you can install any plugin into a .vim/bundle/plugin-name/ folder
 call pathogen#infect()
 
+"Insert new line in normal mode
+nmap <S-CR> O<Esc>
+nmap <CR> o<Esc>
+
+"Set autoread to automatically read files from buffer
+set autoread
+
+"Commands to close all tabs to right
+function! Tabr(bang)
+    let cur=tabpagenr()
+    while cur < tabpagenr('$')
+        exe 'tabclose' . abang . ' ' . (cur+1)
+    endwhile
+endfunction
+command! -bang Tabr call Tabr('<bang>')
+
+"Commands to close all tabs to left
+function! Tabl(bang)
+    while tabpagenr()>1
+        exe 'tabclose' . a:bang . '1'
+    endwhile
+endfunction
+command! -bang Tabl call Tabl('<bang>')
 
 " ============================================================================
 " Python IDE Setup
