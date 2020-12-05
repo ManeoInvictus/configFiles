@@ -1,7 +1,4 @@
 runtime! archlinux.vim
-set background=dark
-hi Normal ctermbg=16 guibg=#000000
-hi LineNr ctermbg=16 guibg=#000000
 " Sample .vimrc file by Martin Brochhaus
 " Presented at PyCon APAC 2012
 " Tweaked by Ajay N R
@@ -13,6 +10,8 @@ hi LineNr ctermbg=16 guibg=#000000
 "" map <c-l> <c-w>l
 "" map <c-h> <c-w>h
 
+" Change <Leader> to ','
+let mapleader = ","
 
 " easier moving between tabs
 map <Leader>n <esc>:tabprevious<CR>
@@ -55,7 +54,7 @@ set number  " show line numbers
 set tw=79   " width of document (used by gd)
 set nowrap  " don't automatically wrap on load
 "" set fo-=t   " don't automatically wrap text when typing
-set colorcolumn=80
+"" set colorcolumn=80
 highlight ColorColumn ctermbg=233
 
 
@@ -104,20 +103,24 @@ nmap <CR> o<Esc>
 "Set autoread to automatically read files from buffer
 set autoread
 
+"Remap Esc key
+imap <M-Space> <Esc>
+vnoremap <M-Space> <Esc>h
+
 "Commands to close all tabs to right
 function! Tabr(bang)
-    let cur=tabpagenr()
-    while cur < tabpagenr('$')
-        exe 'tabclose' . abang . ' ' . (cur+1)
-    endwhile
+let cur=tabpagenr()
+while cur < tabpagenr('$')
+    exe 'tabclose' . abang . ' ' . (cur+1)
+endwhile
 endfunction
 command! -bang Tabr call Tabr('<bang>')
 
 "Commands to close all tabs to left
 function! Tabl(bang)
-    while tabpagenr()>1
-        exe 'tabclose' . a:bang . '1'
-    endwhile
+while tabpagenr()>1
+    exe 'tabclose' . a:bang . '1'
+endwhile
 endfunction
 command! -bang Tabl call Tabl('<bang>')
 
@@ -131,7 +134,7 @@ let python_highlight_all = 1
 " git clone git://github.com/Lokaltog/vim-powerline.git
 set laststatus=2
 " Settings for vim-airline
-let g:airline_solarized_bg = 'dark'
+let g:airline_theme = 'sol'
 
 " Settings for ctrlp
 " cd ~/.vim/bundle
@@ -188,3 +191,11 @@ inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 " mkdir -p ~/.vim/ftplugin
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
 "" set nofoldenable
+
+" Setting colors
+"hi Normal ctermbg=DarkGray guibg=#000000
+"hi LineNr ctermbg=16 guibg=#000000
+"colo desert
+let g:gruvbox_contrast_dark = 'hard'
+autocmd vimenter * colorscheme gruvbox
+set background=dark
